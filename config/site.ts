@@ -1,8 +1,8 @@
 export const siteConfig = {
-  name: "todo app",
-  url: "https://ui.shadcn.com",
+  name: "Taskly",
+  url: "https://github.com/OgaDavid/oneport-interview-fe-task",
   ogImage: "https://ui.shadcn.com/og.jpg",
-  description: "Create, edit and track your todo list effortlessly.",
+  description: "Create, edit and track your tasks effortlessly with Taskly.",
   links: {
     github: "https://github.com/OgaDavid/oneport-interview-fe-task",
   },

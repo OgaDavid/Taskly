@@ -1,9 +1,9 @@
-import { Icons } from "@/components/icons";
+import SiteHeader from "./components/site-header";
 
 function App() {
   return (
     <div>
-      <Icons.logo />
+      <SiteHeader />
     </div>
   );
 }
