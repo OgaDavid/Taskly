@@ -3,7 +3,7 @@ import { siteConfig } from "@/config/site";
 
 const Logo = () => {
   return (
-    <div className="flex font-bold gap-1 items-center">
+    <div className="flex gap-1 items-center">
       <Shield />
       {siteConfig.name}
     </div>

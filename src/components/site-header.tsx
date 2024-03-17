@@ -1,6 +1,6 @@
 import Logo from "./logo";
 import { ArrowUpRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 
 const SiteHeader = () => {
   return (
@@ -8,11 +8,17 @@ const SiteHeader = () => {
       <div className="container flex items-center justify-between py-2">
         <Logo />
         <div>
-          <Button>
+          <a
+            target="_blank"
+            className={buttonVariants({
+              variant: "default",
+            })}
+            href=""
+          >
             GitHub
             <ArrowUpRight className="w-4 h-4" />
             <span className="sr-only">GitHub</span>
-          </Button>
+          </a>
         </div>
       </div>
     </header>
