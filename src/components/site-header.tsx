@@ -1,22 +1,19 @@
-import { cn } from "@/lib/utils";
-import { Icons } from "./icons";
-import { buttonVariants } from "./ui/button";
+import Logo from "./logo";
+import { ArrowUpRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 const SiteHeader = () => {
   return (
-    <header>
-      <Icons.logo />
-      Hello
-      <div
-        className={cn(
-          buttonVariants({
-            variant: "ghost",
-          }),
-          "w-9 px-0"
-        )}
-      >
-        <Icons.gitHub className="h-4 w-4" />
-        <span className="sr-only">GitHub</span>
+    <header className="bg-custom-secondary py-1 border-b-2 shadow-lg border-b-custom-accent">
+      <div className="container flex items-center justify-between py-2">
+        <Logo />
+        <div>
+          <Button>
+            GitHub
+            <ArrowUpRight className="w-4 h-4" />
+            <span className="sr-only">GitHub</span>
+          </Button>
+        </div>
       </div>
     </header>
   );
