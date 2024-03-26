@@ -1,6 +1,6 @@
 import { Modal } from "@/components/ui/modal";
 import { useCreateTaskModalStore } from "@/hooks/use-create-task-modal";
-
+import { CreateNewTaskForm } from "../forms/create-new-task-form";
 const CreateTaskModal = () => {
   const createTaskModalStore = useCreateTaskModalStore();
   return (
@@ -10,7 +10,7 @@ const CreateTaskModal = () => {
       isOpen={createTaskModalStore.isOpen}
       onClose={createTaskModalStore.onClose}
     >
-      Create task
+      <CreateNewTaskForm />
     </Modal>
   );
 };

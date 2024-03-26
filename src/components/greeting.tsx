@@ -19,7 +19,7 @@ const Greeting = () => {
         <h1 className="text-3xl pb-1">My Tasks 🚀</h1>
         <p className="text-custom-neutral/50 flex items-center inter-regular font-medium text-sm">
           <CalendarDays className="w-4 h-4 mr-2" />
-          {getToday()}.
+          {getToday()}
         </p>
       </div>
       <Button onClick={openCreateTaskModal}>

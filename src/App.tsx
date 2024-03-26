@@ -1,6 +1,6 @@
 import SiteHeader from "@/components/site-header";
-import { ModalProvider } from "./providers/modal-provider";
-import Greeting from "./components/greeting";
+import { ModalProvider } from "@/providers/modal-provider";
+import Greeting from "@/components/greeting";
 
 function App() {
   return (
