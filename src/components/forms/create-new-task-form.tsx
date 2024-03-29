@@ -49,8 +49,16 @@ export function CreateNewTaskForm() {
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
+    // shadcn date picker returns day before dueDate selected.
+    // Fix this issue by adding one day to the dueDate.
+
+    const dueDate = new Date(values.dueDate);
+    dueDate.setDate(dueDate.getDate() + 1);
+    values.dueDate = dueDate;
+
+    // Store the form data in local storage
+    localStorage.setItem("formData", JSON.stringify(values));
+
     console.log(values);
   }
 
@@ -113,9 +121,7 @@ export function CreateNewTaskForm() {
                     mode="single"
                     selected={field.value}
                     onSelect={field.onChange}
-                    disabled={(date) =>
-                      date > new Date() || date < new Date("1900-01-01")
-                    }
+                    disabled={(date) => date < new Date()}
                     initialFocus
                     className="bg-custom-secondary rounded-lg border-2 border-custom-accent"
                   />
