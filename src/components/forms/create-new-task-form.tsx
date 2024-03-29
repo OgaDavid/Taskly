@@ -18,15 +18,16 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
-import { cn } from "@/lib/utils";
+import { cn, generateTaskId } from "@/lib/utils";
 import { format } from "date-fns";
 import { CalendarIcon } from "lucide-react";
+import { useLocalStorage } from "@/hooks/use-local-storage";
 
 const formSchema = z.object({
-  task: z.string().min(2, {
+  taskTitle: z.string().min(2, {
     message: "Task title must be at least 2 characters.",
   }),
-  description: z
+  taskDescription: z
     .string()
     .min(2, {
       message: "Task description must be at least 2 characters.",
@@ -40,24 +41,39 @@ const formSchema = z.object({
 });
 
 export function CreateNewTaskForm() {
+  const { setTasks, getTasks } = useLocalStorage("Tasks");
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      task: "",
-      description: "",
+      taskTitle: "",
+      taskDescription: "",
     },
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
+    const allTasks = getTasks() || [];
+
+    // Generate a unique task ID
+    const taskId = generateTaskId();
+
     // shadcn date picker returns day before dueDate selected.
     // Fix this issue by adding one day to the dueDate.
-
     const dueDate = new Date(values.dueDate);
     dueDate.setDate(dueDate.getDate() + 1);
     values.dueDate = dueDate;
 
-    // Store the form data in local storage
-    localStorage.setItem("formData", JSON.stringify(values));
+    // Create a new task object
+    const newTask = {
+      id: taskId,
+      ...values,
+    };
+
+    // Append the new task to the existing tasks or create a new array with the new task
+    const updatedTasks = [...allTasks, newTask];
+
+    // Store the updated tasks in local storage
+    setTasks(updatedTasks);
 
     console.log(values);
   }
@@ -67,7 +83,7 @@ export function CreateNewTaskForm() {
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
         <FormField
           control={form.control}
-          name="task"
+          name="taskTitle"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Task Title</FormLabel>
@@ -80,7 +96,7 @@ export function CreateNewTaskForm() {
         />
         <FormField
           control={form.control}
-          name="description"
+          name="taskDescription"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Task Description</FormLabel>
