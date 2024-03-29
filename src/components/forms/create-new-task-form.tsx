@@ -1,5 +1,7 @@
 import { z } from "zod";
 import { useForm } from "react-hook-form";
+import { format } from "date-fns";
+import { CalendarIcon } from "lucide-react";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import {
@@ -19,9 +21,9 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import { cn, generateTaskId } from "@/lib/utils";
-import { format } from "date-fns";
-import { CalendarIcon } from "lucide-react";
 import { useLocalStorage } from "@/hooks/use-local-storage";
+import { useCreateTaskModalStore } from "@/hooks/use-create-task-modal";
+import { useTasksStore } from "@/store/tasks-store";
 
 const formSchema = z.object({
   taskTitle: z.string().min(2, {
@@ -41,8 +43,6 @@ const formSchema = z.object({
 });
 
 export function CreateNewTaskForm() {
-  const { setTasks, getTasks } = useLocalStorage("Tasks");
-
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -51,31 +51,43 @@ export function CreateNewTaskForm() {
     },
   });
 
+  const { setTasks, getTasks } = useLocalStorage("Tasks");
+
+  const setTasksStore = useTasksStore((state) => state.setTasks); // Function to set tasks to store
+  const onClose = useCreateTaskModalStore((state) => state.onClose); // Function to close the modal
+
   function onSubmit(values: z.infer<typeof formSchema>) {
-    const allTasks = getTasks() || [];
+    try {
+      // Get all tasks from local storage
+      const allTasks = getTasks() || [];
 
-    // Generate a unique task ID
-    const taskId = generateTaskId();
+      // Generate a unique task ID
+      const taskId = generateTaskId();
 
-    // shadcn date picker returns day before dueDate selected.
-    // Fix this issue by adding one day to the dueDate.
-    const dueDate = new Date(values.dueDate);
-    dueDate.setDate(dueDate.getDate() + 1);
-    values.dueDate = dueDate;
+      // Adjust the due date to fix the issue with the date picker returning the day before the selected due date
+      const dueDate = new Date(values.dueDate);
+      dueDate.setDate(dueDate.getDate() + 1);
+      values.dueDate = dueDate;
 
-    // Create a new task object
-    const newTask = {
-      id: taskId,
-      ...values,
-    };
+      // Create a new task object
+      const newTask = {
+        id: taskId,
+        ...values,
+        isCompleted: false,
+      };
 
-    // Append the new task to the existing tasks or create a new array with the new task
-    const updatedTasks = [...allTasks, newTask];
+      // Append the new task to the existing tasks or create a new array with the new task
+      const updatedTasks = [...allTasks, newTask];
 
-    // Store the updated tasks in local storage
-    setTasks(updatedTasks);
-
-    console.log(values);
+      // Store the updated tasks in local storage and tasks store
+      setTasksStore(updatedTasks);
+      setTasks(updatedTasks);
+    } catch (error) {
+      console.log("CREATE_TASK_ERROR", error);
+    } finally {
+      // close modal
+      onClose();
+    }
   }
 
   return (

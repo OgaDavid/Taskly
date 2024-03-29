@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { CalendarDays, Plus } from "lucide-react";
 import { useCreateTaskModalStore } from "@/hooks/use-create-task-modal";
 
-const Greeting = () => {
+const CreateTaskHeader = () => {
   const onOpen = useCreateTaskModalStore((state) => state.onOpen);
   const isOpen = useCreateTaskModalStore((state) => state.isOpen);
 
@@ -30,4 +30,4 @@ const Greeting = () => {
   );
 };
 
-export default Greeting;
+export default CreateTaskHeader;
