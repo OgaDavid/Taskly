@@ -24,7 +24,7 @@ export const ToastProvider = () => {
 
   return (
     <Toaster
-      position={isDesktop ? "bottom-right" : "top-center"}
+      position={isDesktop ? "bottom-center" : "top-center"}
       className="bg-custom-primary"
     />
   );

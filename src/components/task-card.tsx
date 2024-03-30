@@ -1,3 +1,4 @@
+import { useEditTaskModalStore } from "@/hooks/use-edit-task-modal";
 import { useLocalStorage } from "@/hooks/use-local-storage";
 import { useTasksStore } from "@/store/tasks-store";
 import { Task } from "@/types";
@@ -29,6 +30,17 @@ const TaskCard = ({ task }: { task: Task }) => {
   const { completeTask, deleteTask } = useLocalStorage("Tasks");
   const tasks = useTasksStore((state) => state.tasks);
   const setTasks = useTasksStore((state) => state.setTasks);
+
+  const setTaskId = useEditTaskModalStore((state) => state.setTaskId);
+  const onOpen = useEditTaskModalStore((state) => state.onOpen);
+  const isOpen = useEditTaskModalStore((state) => state.isOpen);
+
+  const openEditTaskModal = () => {
+    setTaskId(task.id);
+    if (!isOpen) {
+      onOpen();
+    }
+  };
 
   const handleCompleteTask = (task: Task) => {
     completeTask(task);
@@ -75,7 +87,10 @@ const TaskCard = ({ task }: { task: Task }) => {
           {getDueDate(task.dueDate)}
         </p>
         <div className="flex items-center gap-5">
-          <Pencil className="w-4 h-4 text-custom-neutral/50 hover:text-custom-neutral cursor-pointer" />
+          <Pencil
+            onClick={openEditTaskModal}
+            className="w-4 h-4 text-custom-neutral/50 hover:text-custom-neutral cursor-pointer"
+          />
           <Trash2
             onClick={() => handleDeleteTask(task)}
             className="w-4 h-4 text-custom-neutral/50 hover:text-custom-neutral cursor-pointer"
