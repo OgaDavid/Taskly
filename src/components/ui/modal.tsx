@@ -53,7 +53,7 @@ export const Modal: React.FC<ModalProps> = ({
 
   // Render a drawer for mobile view
   return (
-    <Drawer shouldScaleBackground={true} open={isOpen} onOpenChange={onChange}>
+    <Drawer open={isOpen} onOpenChange={onChange}>
       <DrawerContent>
         <DrawerHeader className="text-left">
           <DrawerTitle>{title}</DrawerTitle>

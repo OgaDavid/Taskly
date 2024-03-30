@@ -161,7 +161,7 @@ export function CreateNewTaskForm() {
             </FormItem>
           )}
         />
-        <Button variant="ghost" type="submit">
+        <Button className="w-full" variant="ghost" type="submit">
           Create Task
         </Button>
       </form>

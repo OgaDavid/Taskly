@@ -10,6 +10,7 @@ import {
   Trash2,
 } from "lucide-react";
 import { toast } from "sonner";
+import { TooltipWrapper } from "./tooltip-wrapper";
 
 const TaskCard = ({ task }: { task: Task }) => {
   /**
@@ -64,16 +65,20 @@ const TaskCard = ({ task }: { task: Task }) => {
       <div>
         <div className="flex mb-3 items-center justify-between">
           <h2>{task.taskTitle}</h2>
-          <div
-            className="cursor-pointer"
-            onClick={() => handleCompleteTask(task)}
+          <TooltipWrapper
+            text={task.isCompleted ? "Task Incomplete" : "Task Complete"}
           >
-            {!task.isCompleted ? (
-              <Circle className="w-5 h-5 text-custom-neutral/50 hover:text-custom-neutral" />
-            ) : (
-              <CircleCheckBig className="w-5 h-5 text-custom-neutral" />
-            )}
-          </div>
+            <div
+              className="cursor-pointer"
+              onClick={() => handleCompleteTask(task)}
+            >
+              {!task.isCompleted ? (
+                <Circle className="w-5 h-5 text-custom-neutral/50 hover:text-custom-neutral" />
+              ) : (
+                <CircleCheckBig className="w-5 h-5 text-custom-neutral" />
+              )}
+            </div>
+          </TooltipWrapper>
         </div>
         <p className="inter-regular text-sm">
           {task.taskDescription.length > 100
@@ -87,14 +92,18 @@ const TaskCard = ({ task }: { task: Task }) => {
           {getDueDate(task.dueDate)}
         </p>
         <div className="flex items-center gap-5">
-          <Pencil
-            onClick={openEditTaskModal}
-            className="w-4 h-4 text-custom-neutral/50 hover:text-custom-neutral cursor-pointer"
-          />
-          <Trash2
-            onClick={() => handleDeleteTask(task)}
-            className="w-4 h-4 text-custom-neutral/50 hover:text-custom-neutral cursor-pointer"
-          />
+          <TooltipWrapper text="Edit Task">
+            <Pencil
+              onClick={openEditTaskModal}
+              className="w-4 h-4 text-custom-neutral/50 hover:text-custom-neutral cursor-pointer"
+            />
+          </TooltipWrapper>
+          <TooltipWrapper text="Delete Task">
+            <Trash2
+              onClick={() => handleDeleteTask(task)}
+              className="w-4 h-4 text-custom-neutral/50 hover:text-custom-neutral cursor-pointer"
+            />
+          </TooltipWrapper>
         </div>
       </div>
     </div>

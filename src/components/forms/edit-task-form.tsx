@@ -154,7 +154,7 @@ export function EditTaskForm() {
             </FormItem>
           )}
         />
-        <Button variant="ghost" type="submit">
+        <Button className="w-full" variant="ghost" type="submit">
           Edit Task
         </Button>
       </form>
