@@ -1,4 +1,5 @@
 import { Toaster } from "@/components/ui/sonner";
+import useMediaQuery from "@/hooks/use-media-query";
 import { useEffect, useState } from "react";
 
 /**
@@ -11,6 +12,8 @@ import { useEffect, useState } from "react";
 export const ToastProvider = () => {
   const [isMounted, setIsMounted] = useState(false);
 
+  const isDesktop = useMediaQuery("(min-width: 768px)");
+
   useEffect(() => {
     setIsMounted(true);
   }, []);
@@ -19,5 +22,10 @@ export const ToastProvider = () => {
     return null;
   }
 
-  return <Toaster position="bottom-right" className="bg-custom-primary" />;
+  return (
+    <Toaster
+      position={isDesktop ? "bottom-right" : "top-center"}
+      className="bg-custom-primary"
+    />
+  );
 };
