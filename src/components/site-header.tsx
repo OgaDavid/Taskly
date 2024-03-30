@@ -5,7 +5,7 @@ import { buttonVariants } from "@/components/ui/button";
 const SiteHeader = () => {
   return (
     <header className="bg-custom-secondary py-1 border-b-2 shadow-lg border-b-custom-accent">
-      <div className="container flex items-center justify-between py-2">
+      <div className="wrapper flex items-center justify-between py-2">
         <Logo />
         <div>
           <a

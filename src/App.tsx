@@ -25,7 +25,7 @@ function App() {
   return (
     <div>
       <SiteHeader />
-      <div className="container pt-10">
+      <div className="wrapper pt-10">
         <CreateTaskHeader />
         <TasksContainer tasks={tasks} />
       </div>

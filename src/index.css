@@ -81,6 +81,10 @@
     src: url("./assets/fonts/Inter-Regular.ttf");
   }
 
+  .wrapper {
+    @apply w-full mx-auto px-8 max-[475px]:px-4 min-[1400px]:max-w-[1400px];
+  }
+
   .inter-regular {
     font-family: inter-regular;
   }
