@@ -1,10 +1,14 @@
 import { useEffect } from "react";
+
 import SiteHeader from "@/components/site-header";
-import { ModalProvider } from "@/providers/modal-provider";
 import CreateTaskHeader from "@/components/create-task-header";
 import TasksContainer from "@/components/tasks-container";
-import { useLocalStorage } from "./hooks/use-local-storage";
+
+import { useLocalStorage } from "@/hooks/use-local-storage";
 import { useTasksStore } from "@/store/tasks-store";
+
+import { ToastProvider } from "@/providers/toast-provider";
+import { ModalProvider } from "@/providers/modal-provider";
 
 function App() {
   const tasks = useTasksStore((state) => state.tasks); // Retrieve tasks from store
@@ -26,6 +30,7 @@ function App() {
         <TasksContainer tasks={tasks} />
       </div>
       <ModalProvider />
+      <ToastProvider />
     </div>
   );
 }

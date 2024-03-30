@@ -24,6 +24,7 @@ import { cn, generateTaskId } from "@/lib/utils";
 import { useLocalStorage } from "@/hooks/use-local-storage";
 import { useCreateTaskModalStore } from "@/hooks/use-create-task-modal";
 import { useTasksStore } from "@/store/tasks-store";
+import { useToast } from "@/components/ui/use-toast";
 
 const formSchema = z.object({
   taskTitle: z.string().min(2, {
@@ -50,6 +51,8 @@ export function CreateNewTaskForm() {
       taskDescription: "",
     },
   });
+
+  const { toast } = useToast();
 
   const { setTasks, getTasks } = useLocalStorage("Tasks");
 
@@ -87,6 +90,10 @@ export function CreateNewTaskForm() {
     } finally {
       // close modal
       onClose();
+      toast({
+        title: "Task created successfully🎉",
+        variant: "default",
+      });
     }
   }
 
