@@ -17,7 +17,7 @@ const CreateTaskHeader = () => {
   const isDesktop = useMediaQuery("(min-width: 768px)");
 
   return (
-    <div className="flex items-center justify-between">
+    <div className="flex items-center pb-4 border-custom-accent border-b-2 justify-between">
       <div>
         <h1 className="text-lg md:text-3xl pb-1">My Tasks 🚀</h1>
         <p className="text-custom-neutral/50 flex items-center inter-regular font-medium text-xs md:text-sm">
