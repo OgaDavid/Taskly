@@ -1,4 +1,3 @@
-import useMediaQuery from "@/hooks/use-media-query";
 import {
   Dialog,
   DialogContent,
@@ -7,16 +6,11 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 
-import {
-  Drawer,
-  DrawerClose,
-  DrawerContent,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerTitle,
-} from "./drawer";
-import { Button } from "./button";
+import { Drawer, DrawerContent, DrawerHeader, DrawerTitle } from "./drawer";
 
+import useMediaQuery from "@/hooks/use-media-query";
+
+// Interface for the props of the Modal component
 interface ModalProps {
   title: string;
   description: string;
@@ -32,14 +26,18 @@ export const Modal: React.FC<ModalProps> = ({
   onClose,
   children,
 }) => {
-  const isDesktop = useMediaQuery("(min-width: 768px)");
+  // Function to handle the change in modal/drawer open state
   const onChange = (open: boolean) => {
     if (!open) {
       onClose();
     }
   };
 
+  // Check if the device is desktop
+  const isDesktop = useMediaQuery("(min-width: 768px)");
+
   if (isDesktop) {
+    // Render a dialog for desktop view
     return (
       <Dialog open={isOpen} onOpenChange={onChange}>
         <DialogContent>
@@ -53,18 +51,14 @@ export const Modal: React.FC<ModalProps> = ({
     );
   }
 
+  // Render a drawer for mobile view
   return (
-    <Drawer open={isOpen} onOpenChange={onChange}>
+    <Drawer shouldScaleBackground={true} open={isOpen} onOpenChange={onChange}>
       <DrawerContent>
         <DrawerHeader className="text-left">
           <DrawerTitle>{title}</DrawerTitle>
         </DrawerHeader>
-        {children}
-        <DrawerFooter className="pt-2">
-          <DrawerClose asChild>
-            <Button variant="outline">Cancel</Button>
-          </DrawerClose>
-        </DrawerFooter>
+        <div className="p-4">{children}</div>
       </DrawerContent>
     </Drawer>
   );
