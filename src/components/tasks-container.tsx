@@ -1,10 +1,11 @@
 import { Task } from "@/types";
+import TaskCard from "./task-card";
 
 const TasksContainer = ({ tasks }: { tasks: Task[] }) => {
   return (
-    <div>
-      {tasks.map((task, i) => (
-        <p key={i}>{task.taskTitle}</p>
+    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 md:gap-5">
+      {tasks.map((task) => (
+        <TaskCard key={task.id} task={task} />
       ))}
     </div>
   );

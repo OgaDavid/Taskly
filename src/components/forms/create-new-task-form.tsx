@@ -66,9 +66,9 @@ export function CreateNewTaskForm() {
       const taskId = generateTaskId();
 
       // Adjust the due date to fix the issue with the date picker returning the day before the selected due date
-      const dueDate = new Date(values.dueDate);
-      dueDate.setDate(dueDate.getDate() + 1);
-      values.dueDate = dueDate;
+      // const dueDate = new Date(values.dueDate);
+      // dueDate.setDate(dueDate.getDate() + 1);
+      // values.dueDate = dueDate;
 
       // Create a new task object
       const newTask = {

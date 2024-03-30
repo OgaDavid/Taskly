@@ -27,7 +27,9 @@ function App() {
       <SiteHeader />
       <div className="wrapper pt-10">
         <CreateTaskHeader />
-        <TasksContainer tasks={tasks} />
+        <div className="mt-12">
+          <TasksContainer tasks={tasks} />
+        </div>
       </div>
       <ModalProvider />
       <ToastProvider />
