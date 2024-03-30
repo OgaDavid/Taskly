@@ -166,7 +166,9 @@ export function CreateNewTaskForm() {
             </FormItem>
           )}
         />
-        <Button type="submit">Submit</Button>
+        <Button variant="ghost" type="submit">
+          Create Task
+        </Button>
       </form>
     </Form>
   );

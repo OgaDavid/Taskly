@@ -18,7 +18,8 @@ const buttonVariants = cva(
         date: "border-2 border-custom-accent hover:border-custom-neutral/30 text-sm px-6 py-2 font-medium text-[#F8F8F8]",
         secondary:
           "bg-secondary text-secondary-foreground hover:bg-secondary/80",
-        ghost: "hover:bg-accent hover:text-accent-foreground",
+        ghost:
+          "bg-custom-neutral border-2 hover:bg-transparent hover:border-custom-neutral text-sm hover:border-dashed hover:text-custom-neutral text-custom-accent",
         link: "text-primary underline-offset-4 hover:underline",
       },
       size: {
