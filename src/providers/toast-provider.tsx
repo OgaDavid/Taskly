@@ -19,5 +19,5 @@ export const ToastProvider = () => {
     return null;
   }
 
-  return <Toaster position="bottom-right" className="bg-transparent" />;
+  return <Toaster position="bottom-right" className="bg-custom-primary" />;
 };
