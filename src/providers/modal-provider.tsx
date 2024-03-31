@@ -1,5 +1,6 @@
 import CreateTaskModal from "@/components/modals/create-task-modal";
 import EditTaskModal from "@/components/modals/edit-task-modal";
+import PreviewTaskModal from "@/components/modals/preview-task-modal";
 import { useState, useEffect } from "react";
 
 /**
@@ -23,6 +24,7 @@ export const ModalProvider = () => {
     <>
       <CreateTaskModal />
       <EditTaskModal />
+      <PreviewTaskModal />
     </>
   );
 };

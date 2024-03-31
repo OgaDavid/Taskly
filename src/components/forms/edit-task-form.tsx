@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { format } from "date-fns";
-import { CalendarIcon } from "lucide-react";
+import { CalendarIcon, ClipboardPenLine } from "lucide-react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
 
@@ -56,7 +56,7 @@ export function EditTaskForm() {
     defaultValues: {
       taskTitle: task?.taskTitle || "",
       taskDescription: task?.taskDescription || "",
-      dueDate: task?.dueDate || null,
+      dueDate: new Date(task?.dueDate) || null,
     },
   });
 
@@ -81,7 +81,9 @@ export function EditTaskForm() {
     } finally {
       // close modal
       onClose();
-      toast("Task edited successfully🎉");
+      toast("Task edited successfully", {
+        icon: <ClipboardPenLine className="w-4 h-4 text-custom-neutral" />,
+      });
     }
   }
 

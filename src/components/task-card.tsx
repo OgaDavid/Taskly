@@ -6,41 +6,44 @@ import {
   CalendarDays,
   Circle,
   CircleCheckBig,
+  Expand,
   Pencil,
   Trash2,
 } from "lucide-react";
 import { toast } from "sonner";
 import { TooltipWrapper } from "./tooltip-wrapper";
 import { cn } from "@/lib/utils";
+import { usePreviewTaskModalStore } from "@/hooks/use-preview-task-modal";
+import { getDueDate } from "@/lib/utils";
 
 const TaskCard = ({ task }: { task: Task }) => {
-  /**
-   * Converts a date string to a formatted due date.
-   * @param dateString - The date string to convert.
-   * @returns The formatted due date.
-   */
-  const getDueDate = (dateString: string) => {
-    const options: Intl.DateTimeFormatOptions = {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    };
-    const date = new Date(dateString);
-    return date.toLocaleDateString("en-US", { ...options, year: "numeric" });
-  };
-
   const { completeTask, deleteTask } = useLocalStorage("Tasks");
   const tasks = useTasksStore((state) => state.tasks);
   const setTasks = useTasksStore((state) => state.setTasks);
 
-  const setTaskId = useEditTaskModalStore((state) => state.setTaskId);
-  const onOpen = useEditTaskModalStore((state) => state.onOpen);
-  const isOpen = useEditTaskModalStore((state) => state.isOpen);
+  const setEditTaskId = useEditTaskModalStore((state) => state.setTaskId);
+  const onOpenEditTaskModal = useEditTaskModalStore((state) => state.onOpen);
+  const isEditTaskModalOpen = useEditTaskModalStore((state) => state.isOpen);
+
+  const setPreviewTaskId = usePreviewTaskModalStore((state) => state.setTaskId);
+  const onOpenPreviewTaskModal = usePreviewTaskModalStore(
+    (state) => state.onOpen
+  );
+  const isPreviewTaskModalOpen = usePreviewTaskModalStore(
+    (state) => state.isOpen
+  );
 
   const openEditTaskModal = () => {
-    setTaskId(task.id);
-    if (!isOpen) {
-      onOpen();
+    setEditTaskId(task.id);
+    if (!isEditTaskModalOpen) {
+      onOpenEditTaskModal();
+    }
+  };
+
+  const openPreviewTaskModal = () => {
+    setPreviewTaskId(task.id);
+    if (!isPreviewTaskModalOpen) {
+      onOpenPreviewTaskModal();
     }
   };
 
@@ -115,6 +118,12 @@ const TaskCard = ({ task }: { task: Task }) => {
           {getDueDate(task.dueDate)}
         </p>
         <div className="flex items-center gap-5">
+          <TooltipWrapper text="Preview Task">
+            <Expand
+              onClick={openPreviewTaskModal}
+              className="w-4 h-4 text-custom-neutral/50 hover:text-custom-neutral cursor-pointer"
+            />
+          </TooltipWrapper>
           <TooltipWrapper text="Edit Task">
             <Pencil
               onClick={openEditTaskModal}

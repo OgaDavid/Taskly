@@ -24,3 +24,18 @@ export function generateTaskId(): string {
   }
   return shortId;
 }
+
+/**
+ * Converts a date string to a formatted due date.
+ * @param dateString - The date string to convert.
+ * @returns The formatted due date.
+ */
+export const getDueDate = (dateString: string) => {
+  const options: Intl.DateTimeFormatOptions = {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  };
+  const date = new Date(dateString);
+  return date.toLocaleDateString("en-US", { ...options, year: "numeric" });
+};
