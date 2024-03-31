@@ -44,3 +44,8 @@ Develop a task management application that allows users to create, update, and d
 - [x] Use Git for version control and maintain a well-structured repository.
 - [x] Include clear and concise documentation explaining how to set up and run the application locally.
 - [x] Document any design decisions or trade-offs made during development.
+
+# Demo
+
+https://github.com/OgaDavid/Taskly/assets/104001201/326c53ce-1ad6-4f19-8362-da52d2fb85d2
+
