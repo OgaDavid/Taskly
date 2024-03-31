@@ -140,7 +140,7 @@ export function CreateNewTaskForm() {
                       )}
                     >
                       {field.value ? (
-                        format(field.value, "PPP")
+                        format(field.value, "PP")
                       ) : (
                         <span>Pick a date</span>
                       )}

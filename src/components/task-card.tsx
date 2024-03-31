@@ -4,8 +4,8 @@ import { useTasksStore } from "@/store/tasks-store";
 import { Task } from "@/types";
 import {
   CalendarDays,
+  CircleCheck,
   Circle,
-  CircleCheckBig,
   Expand,
   Pencil,
   Trash2,
@@ -97,7 +97,7 @@ const TaskCard = ({ task }: { task: Task }) => {
             {!task.isCompleted ? (
               <Circle className="w-5 h-5 text-custom-neutral/50 hover:text-custom-neutral" />
             ) : (
-              <CircleCheckBig className="w-5 h-5 text-custom-neutral" />
+              <CircleCheck className="w-5 h-5 text-custom-neutral" />
             )}
           </div>
         </TooltipWrapper>
@@ -106,7 +106,7 @@ const TaskCard = ({ task }: { task: Task }) => {
         <div className="mb-3">
           <h2>{task.taskTitle}</h2>
         </div>
-        <p className="inter-regular text-sm">
+        <p className="inter-regular text-sm text-custom-neutral/80">
           {task.taskDescription.length > 100
             ? `${task.taskDescription.slice(0, 100)}...`
             : task.taskDescription}
