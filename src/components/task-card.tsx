@@ -58,7 +58,9 @@ const TaskCard = ({ task }: { task: Task }) => {
   const handleDeleteTask = (task: Task) => {
     deleteTask(task);
     setTasks(tasks.filter((t: Task) => t.id !== task.id));
-    toast.success("Task deleted successfully.");
+    toast("Task deleted successfully.", {
+      icon: <Trash2 className="w-4 h-4 text-custom-neutral" />,
+    });
   };
 
   return (

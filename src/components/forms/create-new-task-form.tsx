@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { format } from "date-fns";
-import { CalendarIcon } from "lucide-react";
+import { CalendarIcon, PartyPopper } from "lucide-react";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import {
@@ -88,7 +88,9 @@ export function CreateNewTaskForm() {
     } finally {
       // close modal
       onClose();
-      toast("Task created successfully🎉");
+      toast("Task created successfully", {
+        icon: <PartyPopper className="w-4 h-4 text-custom-neutral" />,
+      });
     }
   }
 
