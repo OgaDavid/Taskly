@@ -10,7 +10,7 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default:
-          "border-2 border-custom-accent hover:border-custom-neutral/30 text-sm hover:border-dashed px-6 py-2 rounded-lg font-medium text-[#F8F8F8]",
+          "border-2 border-custom-accent hover:border-custom-neutral/30 text-sm max-md:border-dashed md:hover:border-dashed px-6 py-2 rounded-lg font-medium text-[#F8F8F8]",
         destructive:
           "bg-destructive text-destructive-foreground hover:bg-destructive/90",
         outline:

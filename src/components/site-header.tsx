@@ -1,25 +1,32 @@
 import Logo from "./logo";
-import { ArrowUpRight } from "lucide-react";
+import { Icons } from "@/components/ui/icons";
 import { buttonVariants } from "@/components/ui/button";
+import { siteConfig } from "@/config/site";
+import { TooltipWrapper } from "@/components/tooltip-wrapper";
+import useMediaQuery from "@/hooks/use-media-query";
 
 const SiteHeader = () => {
+  const isDesktop = useMediaQuery("(min-width: 640px)");
+
   return (
     <header className="bg-custom-secondary py-1 border-b-2 shadow-lg border-b-custom-accent">
       <div className="wrapper flex items-center justify-between py-2">
         <Logo />
-        <div>
+        <TooltipWrapper text="Leave a star on GitHub">
           <a
             target="_blank"
             className={buttonVariants({
-              variant: "default",
+              variant: isDesktop ? "default" : "outline",
             })}
-            href=""
+            href={siteConfig.links.github}
           >
-            GitHub
-            <ArrowUpRight className="w-4 h-4" />
+            <div className="flex items-center">
+              <Icons.gitHub className="h-4 w-4" />
+              <p className="max-md:hidden ml-2">GitHub</p>
+            </div>
             <span className="sr-only">GitHub</span>
           </a>
-        </div>
+        </TooltipWrapper>
       </div>
     </header>
   );
