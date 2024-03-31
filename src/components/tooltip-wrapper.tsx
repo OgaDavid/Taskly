@@ -13,7 +13,7 @@ export const TooltipWrapper = ({
   text: string;
 }) => {
   return (
-    <TooltipProvider>
+    <TooltipProvider delayDuration={200}>
       <Tooltip>
         <TooltipTrigger asChild>{children}</TooltipTrigger>
         <TooltipContent>

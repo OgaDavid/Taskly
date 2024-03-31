@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import { toast } from "sonner";
 import { TooltipWrapper } from "./tooltip-wrapper";
+import { cn } from "@/lib/utils";
 
 const TaskCard = ({ task }: { task: Task }) => {
   /**
@@ -61,24 +62,44 @@ const TaskCard = ({ task }: { task: Task }) => {
   };
 
   return (
-    <div className="border-2 flex flex-col justify-between gap-5 border-custom-accent bg-custom-primary py-8 px-4 rounded-lg">
-      <div>
-        <div className="flex mb-3 items-center justify-between">
-          <h2>{task.taskTitle}</h2>
-          <TooltipWrapper
-            text={task.isCompleted ? "Task Incomplete" : "Task Complete"}
+    <div className="border-2 flex flex-col justify-between gap-5 border-custom-accent bg-custom-primary py-4 px-4 rounded-lg">
+      <div className="flex justify-between items-center">
+        <span className="relative flex h-3 w-3">
+          <span
+            className={cn(
+              "animate-ping absolute inline-flex h-full w-full rounded-full opacity-75",
+              !task.isCompleted ? "bg-yellow-400" : "bg-green-400"
+            )}
+          />
+          <span
+            className={cn(
+              "relative inline-flex rounded-full h-3 w-3",
+              !task.isCompleted ? "bg-yellow-500" : "bg-green-500"
+            )}
+          />
+        </span>
+        <TooltipWrapper
+          text={
+            task.isCompleted
+              ? "Mark task as incomplete"
+              : "Mark task as complete"
+          }
+        >
+          <div
+            className="cursor-pointer"
+            onClick={() => handleCompleteTask(task)}
           >
-            <div
-              className="cursor-pointer"
-              onClick={() => handleCompleteTask(task)}
-            >
-              {!task.isCompleted ? (
-                <Circle className="w-5 h-5 text-custom-neutral/50 hover:text-custom-neutral" />
-              ) : (
-                <CircleCheckBig className="w-5 h-5 text-custom-neutral" />
-              )}
-            </div>
-          </TooltipWrapper>
+            {!task.isCompleted ? (
+              <Circle className="w-5 h-5 text-custom-neutral/50 hover:text-custom-neutral" />
+            ) : (
+              <CircleCheckBig className="w-5 h-5 text-custom-neutral" />
+            )}
+          </div>
+        </TooltipWrapper>
+      </div>
+      <div>
+        <div className="mb-3">
+          <h2>{task.taskTitle}</h2>
         </div>
         <p className="inter-regular text-sm">
           {task.taskDescription.length > 100
